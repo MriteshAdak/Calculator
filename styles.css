@@ -5,6 +5,7 @@ body
     display: flex;
     justify-content: center;
     padding: 2%;
+    background-color: coral;
 }
 
 #calculator
@@ -15,21 +16,33 @@ body
     width: 400px;
     gap: 5px;
     padding: 5px;
-    border: 1px solid black;
+    border: 5px solid black;
+    background-color: black;
+}
+
+#displaySection
+{
+    flex-grow: 1;
+    display: flex;
 }
 
 #display
 {
-    height: 15%;
-    width: 100%;
+    flex-grow: 1;
     border: 1px solid black;
+    text-align: right;
+    font-weight: bolder;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: white;
+    font-size: 3em;
+    padding: 5px;
 }
 
 #buttons
 {
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
+    flex-grow: 5;
     /* border: 1px solid black; */
     gap: 5px;
     /* padding: 5px; */
@@ -81,7 +94,7 @@ body
     display: flex;
 }
 
-#divide, #multiply, #subtract, #add, #AC, #DEL, #nine, #eight, #seven, #six, #five, #four, #three, #two, #one, #zero, #equal, #dot
+#divide, #multiply, #subtract, #add, #clear, #delete, #nine, #eight, #seven, #six, #five, #four, #three, #two, #one, #zero, #equal, #dot, #reset
 {
     flex-grow: 1;
     border: 1px solid black;

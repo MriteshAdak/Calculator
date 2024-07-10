@@ -1,23 +1,92 @@
 // adding logic for the calculator
 
-function add(a, b)
+const operators = ['+', '-', 'x', '/', '='];
+const digits = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+let stack = [];
+let op1, op2, op;
+
+const buttons = document.querySelector('#buttons');
+const display = document.querySelector('#display');
+
+buttons.addEventListener('click', (e) => 
+    {
+        const button = e.target.textContent;
+        
+        if (button === 'DEL')
+            backspace();
+        else if (operators.includes(button))
+            calculate(stack, button);
+        else if (button === 'AC')
+            reset();
+        else if (button === 'CE')
+            clear();
+        else
+            store(button);
+    });    
+
+function store(input)
 {
-    return a + b;
+    stack.push(input);
+    display.textContent = stack.join('');
 }
 
-function subtract(a, b)
+function calculate(input, operator)
 {
-    return a - b;
+    if (stack.length != 0)
+    {
+        if (op1 == undefined)
+        {
+            if (operator != '=')
+            {
+                op1 = parseInt(input.join(''));
+                op = operator;
+                stack = [];
+            }
+        }
+        else
+        {
+            op2 = parseInt(input.join(''));
+            const result = equate(op1, op, op2);
+            stack = [result];
+            display.textContent = stack;
+            op1 = result;
+            console.log(result);
+            if (operator != '=')
+            {
+                op = operator;
+                stack = [];
+            }
+        }
+    }
 }
 
-function multiply(a, b)
+function equate(a, operator, b)
 {
-    return a * b;
+    switch (operator)
+    {
+        case '+': return a + b;
+        case '-': return a - b;
+        case 'x': return a * b;
+        case '/': return a / b;
+    }
+
 }
 
-function divide(a, b)
+function reset()
 {
-    return a / b;
+    op1 = op2 = op = undefined;
+    stack = [];
+    display.textContent = stack.join('');
 }
 
-let operand1, operator, operand2;
+function backspace()
+{
+    stack.pop();
+    display.textContent = stack.join('');
+}
+
+function clear()
+{
+    stack = [];
+    display.textContent = stack.join('');
+}
