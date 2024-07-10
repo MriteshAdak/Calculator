@@ -1,0 +1,90 @@
+/* added styling for the calculator */
+
+body
+{
+    display: flex;
+    justify-content: center;
+    padding: 2%;
+}
+
+#calculator
+{
+    display: flex;
+    flex-direction: column;
+    height: 600px;
+    width: 400px;
+    gap: 5px;
+    padding: 5px;
+    border: 1px solid black;
+}
+
+#display
+{
+    height: 15%;
+    width: 100%;
+    border: 1px solid black;
+}
+
+#buttons
+{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    /* border: 1px solid black; */
+    gap: 5px;
+    /* padding: 5px; */
+}
+
+#section1
+{
+    display: flex;
+    flex-grow: 1;
+    gap: 5px;
+    /* padding: 5px; */
+    /* justify-content: space-evenly; */
+}
+
+#section2
+{
+    display: flex;
+    flex-grow: 4;
+    /* padding: 5px; */
+    gap: 5px;
+}
+
+#section21
+{
+    display: flex;
+    flex-grow: 3;
+    flex-direction: column;
+    /* border: 1px solid red; */
+    gap: 5px;
+    /* padding: 5px; */
+}
+
+#section22
+{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 5px;
+    /* padding: 5px; */
+    /* border: 1px solid blue; */
+}
+
+#section211, #section212, #section213, #section214
+{
+    flex-grow: 1;
+    /* border: 1px solid green; */
+    gap: 5px;
+    /* padding: 5px; */
+    display: flex;
+}
+
+#divide, #multiply, #subtract, #add, #AC, #DEL, #nine, #eight, #seven, #six, #five, #four, #three, #two, #one, #zero, #equal, #dot
+{
+    flex-grow: 1;
+    border: 1px solid black;
+    font-weight: bolder;
+    font-family: 'Courier New', Courier, monospace;
+}
