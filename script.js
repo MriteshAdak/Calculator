@@ -1,9 +1,9 @@
 // adding logic for the calculator
 
-const operators = ['+', '-', 'x', '/', '='];
+const operators = ['+', '-', 'x', '/'];
 const digits = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
 let stack = [];
-let op1, op2, op;
+let op1, op2, op; //operand 1, operand 2, operator
 
 const buttons = document.querySelector('#buttons');
 const display = document.querySelector('#display');
@@ -15,11 +15,13 @@ buttons.addEventListener('click', (e) =>
         if (button === 'DEL')
             backspace();
         else if (operators.includes(button))
-            calculate(stack, button);
+            operate(button);
         else if (button === 'AC')
             reset();
         else if (button === 'CE')
             clear();
+        else if (button === '=')
+            equals();
         else
             store(button);
     });    
@@ -27,66 +29,93 @@ buttons.addEventListener('click', (e) =>
 function store(input)
 {
     stack.push(input);
-    display.textContent = stack.join('');
+    show();
 }
 
-function calculate(input, operator)
+function operate(operator)
 {
     if (stack.length != 0)
     {
         if (op1 == undefined)
         {
-            if (operator != '=')
-            {
-                op1 = parseInt(input.join(''));
-                op = operator;
-                stack = [];
-            }
+            op1 = parseInt(stack.join(''));
+            stack = [];
         }
         else
         {
-            op2 = parseInt(input.join(''));
-            const result = equate(op1, op, op2);
-            stack = [result];
-            display.textContent = stack;
-            op1 = result;
-            console.log(result);
-            if (operator != '=')
-            {
-                op = operator;
-                stack = [];
-            }
+            op2 = parseInt(stack.join(''));
+            op1 = equate(op1, op, op2);
+            stack = [op1];
+            show();
+            stack = [];
         }
+    }
+    op = operator;
+}
+
+function equals()
+{
+    if (stack.length != 0 && op1 != undefined && op != undefined)
+    {
+        op2 = parseInt(stack.join(''));
+        op1 = equate(op1, op, op2);
+        stack = [op1];
+        show();
+        stack = [];
     }
 }
 
 function equate(a, operator, b)
 {
+    let result;
     switch (operator)
     {
-        case '+': return a + b;
-        case '-': return a - b;
-        case 'x': return a * b;
-        case '/': return a / b;
+        case '+':
+            result = a + b;
+            break;
+        case '-': 
+            result = a - b;
+            break;
+        case 'x': 
+            result = a * b;
+            break;
+        case '/': 
+            result = a / b;
+            break;
+        default: break;
     }
+    
+    if (!Number.isInteger(result))
+        result = result.toFixed(2);
 
+    return result;
 }
 
 function reset()
 {
     op1 = op2 = op = undefined;
     stack = [];
-    display.textContent = stack.join('');
+    show();
 }
 
 function backspace()
 {
     stack.pop();
-    display.textContent = stack.join('');
+    show();
 }
 
 function clear()
 {
     stack = [];
-    display.textContent = stack.join('');
+    show();
+}
+
+function show()
+{
+    let value = stack.join('');
+    
+    if (value.length > 11)
+        value = value.slice(0, 11);
+
+    display.textContent = value;
 }
