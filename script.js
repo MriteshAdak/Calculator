@@ -22,6 +22,8 @@ buttons.addEventListener('click', (e) =>
             clear();
         else if (button === '=')
             equals();
+        else if (button === '.')
+            decimal();
         else
             store(button);
     });    
@@ -32,18 +34,32 @@ function store(input)
     show();
 }
 
+function decimal()
+{
+    if(!stack.includes('.'))
+        store('.');
+}
+
 function operate(operator)
 {
     if (stack.length != 0)
     {
         if (op1 == undefined)
         {
-            op1 = parseInt(stack.join(''));
+            if (stack.includes('.'))
+                op1 = parseFloat(stack.join(''));
+            else
+                op1 = parseInt(stack.join(''));
+    
             stack = [];
         }
         else
         {
-            op2 = parseInt(stack.join(''));
+            if (stack.includes('.'))
+                op2 = parseFloat(stack.join(''));
+            else
+                op2 = parseInt(stack.join(''));
+
             op1 = equate(op1, op, op2);
             stack = [op1];
             show();
@@ -57,7 +73,11 @@ function equals()
 {
     if (stack.length != 0 && op1 != undefined && op != undefined)
     {
-        op2 = parseInt(stack.join(''));
+        if (stack.includes('.'))
+            op2 = parseFloat(stack.join(''));
+        else
+            op2 = parseInt(stack.join(''));
+    
         op1 = equate(op1, op, op2);
         stack = [op1];
         show();

@@ -93,3 +93,23 @@ body
     font-family: 'Courier New', Courier, monospace;
     font-size: 1.5em;
 }
+
+#divide, #multiply, #subtract, #add, #equal
+{
+    background-color: chocolate;
+}
+
+#nine, #eight, #seven, #six, #five, #four, #three, #two, #one, #zero
+{
+    background-color: rgb(253, 196, 88);
+}
+
+#dot
+{
+    background-color: burlywood;
+}
+
+#clear, #delete, #reset
+{
+    background-color: orange;
+}
